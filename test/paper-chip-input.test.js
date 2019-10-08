@@ -1,6 +1,8 @@
 import { fixture, assert, nextFrame, aTimeout, html } from '@open-wc/testing';
 import '@polymer/iron-icons/iron-icons.js';
 import * as MockInteractions from '@polymer/iron-test-helpers/mock-interactions.js';
+import { clearAll, clear } from '@advanced-rest-client/arc-icons/ArcIcons.js';
+import { directionsBike, directionsBoat, directionsBus } from '../demo/maps-icons.js';
 import '../anypoint-chip-input.js';
 
 describe('<anypoint-chip-input>', () => {
@@ -41,7 +43,7 @@ describe('<anypoint-chip-input>', () => {
     }];
     return (await fixture(html`
       <anypoint-chip-input
-        chipremoveicon="add"
+        .chipRemoveIcon="${clearAll}"
         .chips="${chips}"></anypoint-chip-input>`));
   }
 
@@ -73,9 +75,9 @@ describe('<anypoint-chip-input>', () => {
 
   async function suggestionsWithIconsFixture() {
     const source = [
-      { value: 'c1', icon: 'i1' },
-      { value: 'c2', icon: 'i2' },
-      { value: 'c3', icon: 'i3' },
+      { value: 'c1', icon: directionsBike },
+      { value: 'c2', icon: directionsBoat },
+      { value: 'c3', icon: directionsBus },
     ];
     return (await fixture(html`
       <anypoint-chip-input
@@ -317,8 +319,8 @@ describe('<anypoint-chip-input>', () => {
         }
       }));
       await nextFrame();
-      const iconNode = element.shadowRoot.querySelector('anypoint-chip iron-icon');
-      assert.equal(iconNode.icon, 'i1');
+      const iconNode = element.shadowRoot.querySelector('anypoint-chip .icon');
+      assert.include(iconNode.innerHTML, 'M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12');
     });
   });
 
@@ -355,7 +357,7 @@ describe('<anypoint-chip-input>', () => {
       element.chipsValue = ['c2'];
       assert.equal(element.chips[0].label, 'c2', 'Has label');
       assert.isTrue(element.chips[0].removable, 'Is removable');
-      assert.equal(element.chips[0].icon, 'i2', 'Has icon');
+      assert.equal(element.chips[0].icon, directionsBoat, 'Has icon');
     });
 
     it('Removes chips when value is empty array', async () => {
@@ -506,19 +508,18 @@ describe('<anypoint-chip-input>', () => {
 
   describe('Chip icon', () => {
     let element;
-
     it('has default icon on the chip', async () => {
       element = await chipsFixture();
       await nextFrame();
       const node = element.shadowRoot.querySelector('anypoint-chip');
-      assert.equal(node.removeIcon, 'clear');
+      assert.equal(node.removeIcon, clear);
     });
 
     it('has the icon from attribute', async () => {
       element = await chipsWithIconFixture();
       await nextFrame();
       const node = element.shadowRoot.querySelector('anypoint-chip');
-      assert.equal(node.removeIcon, 'add');
+      assert.equal(node.removeIcon, clearAll);
     });
   });
 

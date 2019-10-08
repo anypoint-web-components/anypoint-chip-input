@@ -2,9 +2,7 @@ import { html } from 'lit-html';
 import { ArcDemoPage } from '@advanced-rest-client/arc-demo-helper/ArcDemoPage.js';
 import '@anypoint-web-components/anypoint-checkbox/anypoint-checkbox.js';
 import '@advanced-rest-client/arc-demo-helper/arc-interactive-demo.js';
-import '@polymer/iron-icon/iron-icon.js';
-import '@polymer/iron-icons/iron-icons.js';
-import '@polymer/iron-icons/maps-icons.js';
+import * as mapIcons from './maps-icons.js';
 import '../anypoint-chip-input.js';
 
 class DemoPage extends ArcDemoPage {
@@ -46,83 +44,83 @@ class DemoPage extends ArcDemoPage {
         label: 'Chip #2', removable: true
       },
       {
-        label: 'Chip #3', icon: 'maps:directions-bike'
+        label: 'Chip #3', icon: mapIcons.directionsBike
       }
     ];
 
     this.iconSuggestions = [{
       value: 'Biking',
-      icon: 'maps:directions-bike'
+      icon: mapIcons.directionsBike
     }, {
       value: 'Boat trip',
-      icon: 'maps:directions-boat'
+      icon: mapIcons.directionsBoat
     }, {
       value: 'Bus trip',
-      icon: 'maps:directions-bus'
+      icon: mapIcons.directionsBus
     }, {
       value: 'Car trip',
-      icon: 'maps:directions-car'
+      icon: mapIcons.directionsCar
     }, {
       value: 'Train trip',
-      icon: 'maps:directions-railway'
+      icon: mapIcons.directionsRailway
     }, {
       value: 'Running',
-      icon: 'maps:directions-run'
+      icon: mapIcons.directionsRun
     }, {
       value: 'Hiking',
-      icon: 'maps:directions-walk'
+      icon: mapIcons.directionsWalk
     }, {
       value: 'Reading',
-      icon: 'maps:local-library'
+      icon: mapIcons.localLibrary
     }, {
       value: 'Shopping',
-      icon: 'maps:local-grocery-store'
+      icon: mapIcons.localGroceryStore
     }, {
       value: 'Movies!',
-      icon: 'maps:local-movies'
+      icon: mapIcons.localMovies
     }];
 
     this.allowedChips = ['apple', 'Orange', 'BANANA'];
 
     this.idSuggestions = [{
       value: 'Biking',
-      icon: 'maps:directions-bike',
+      icon: mapIcons.directionsBike,
       id: 'activity-1'
     }, {
       value: 'Boat trip',
-      icon: 'maps:directions-boat',
+      icon: mapIcons.directionsBoat,
       id: 'activity-2'
     }, {
       value: 'Bus trip',
-      icon: 'maps:directions-bus',
+      icon: mapIcons.directionsBus,
       id: 'activity-3'
     }, {
       value: 'Car trip',
-      icon: 'maps:directions-car',
+      icon: mapIcons.directionsCar,
       id: 'activity-4'
     }, {
       value: 'Train trip',
-      icon: 'maps:directions-railway',
+      icon: mapIcons.directionsRailway,
       id: 'activity-5'
     }, {
       value: 'Running',
-      icon: 'maps:directions-run',
+      icon: mapIcons.directionsRun,
       id: 'activity-6'
     }, {
       value: 'Hiking',
-      icon: 'maps:directions-walk',
+      icon: mapIcons.directionsWalk,
       id: 'activity-7'
     }, {
       value: 'Reading',
-      icon: 'maps:local-library',
+      icon: mapIcons.localLibrary,
       id: 'activity-8'
     }, {
       value: 'Shopping',
-      icon: 'maps:local-grocery-store',
+      icon: mapIcons.localGroceryStore,
       id: 'activity-9'
     }, {
       value: 'Movies!',
-      icon: 'maps:local-movies',
+      icon: mapIcons.localMovies,
       id: 'activity-10'
     }];
   }
@@ -297,7 +295,7 @@ class DemoPage extends ArcDemoPage {
                 label: 'Chip #2', removable: true
               },
               {
-                label: 'Chip #3', icon: 'maps:directions-bike'
+                label: 'Chip #3', icon: mapIcons.directionsBike
               }
             ];
             ...
@@ -310,7 +308,7 @@ class DemoPage extends ArcDemoPage {
           </code>
         </details>
 
-        <h3>Chip suggestions with icons</h3>
+        <h3>Chip suggestions</h3>
         <p>
           Chip input accepts <code>source</code> array with a list of suggestions
           to render in a dropdown on user input. It can be list of strings or
@@ -358,13 +356,13 @@ class DemoPage extends ArcDemoPage {
             ${`const source = [
               {
                 value: 'Biking',
-                icon: 'maps:directions-bike'
+                icon: mapIcons.directionsBike
               }, {
                 value: 'Boat trip',
-                icon: 'maps:directions-boat'
+                icon: mapIcons.directionsBoat
               }, {
                 value: 'Bus trip',
-                icon: 'maps:directions-bus'
+                icon: mapIcons.directionsBus
               }
               ...
             ];
@@ -397,13 +395,13 @@ class DemoPage extends ArcDemoPage {
             ${`const source = [
               {
                 value: 'Biking',
-                icon: 'maps:directions-bike'
+                icon: mapIcons.directionsBike
               }, {
                 value: 'Boat trip',
-                icon: 'maps:directions-boat'
+                icon: mapIcons.directionsBoat
               }, {
                 value: 'Bus trip',
-                icon: 'maps:directions-bus'
+                icon: mapIcons.directionsBus
               }
               ...
             ];
@@ -449,15 +447,15 @@ class DemoPage extends ArcDemoPage {
             ${`const source = [
               {
                 value: 'Biking',
-                icon: 'maps:directions-bike',
+                icon: mapIcons.directionsBike
                 id: 'activity-1'
               }, {
                 value: 'Boat trip',
-                icon: 'maps:directions-boat',
+                icon: mapIcons.directionsBoat
                 id: 'activity-2'
               }, {
                 value: 'Bus trip',
-                icon: 'maps:directions-bus',
+                icon: mapIcons.directionsBus
                 id: 'activity-3'
               }
               ...
@@ -492,15 +490,15 @@ class DemoPage extends ArcDemoPage {
             ${`const source = [
               {
                 value: 'Biking',
-                icon: 'maps:directions-bike',
+                icon: mapIcons.directionsBike
                 id: 'activity-1'
               }, {
                 value: 'Boat trip',
-                icon: 'maps:directions-boat',
+                icon: mapIcons.directionsBoat
                 id: 'activity-2'
               }, {
                 value: 'Bus trip',
-                icon: 'maps:directions-bus',
+                icon: mapIcons.directionsBus
                 id: 'activity-3'
               }
               ...

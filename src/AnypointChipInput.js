@@ -14,7 +14,6 @@ import { html, css } from 'lit-element';
 import { AnypointInput } from '@anypoint-web-components/anypoint-input/src/AnypointInput.js';
 import '@anypoint-web-components/anypoint-autocomplete/anypoint-autocomplete.js';
 import '@anypoint-web-components/anypoint-chip/anypoint-chip.js';
-import '@polymer/iron-icon/iron-icon.js';
 /**
  * `anypoint-chip-input`
  *
@@ -80,6 +79,15 @@ export class AnypointChipInput extends AnypointInput {
       :host([compatibility]) {
         min-height: 40px;
         height: 40px;
+      }
+
+      .icon {
+        fill: currentColor;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin: 0 0 0 8px;
+        vertical-align: middle;
       }`
     ];
   }
@@ -103,9 +111,9 @@ export class AnypointChipInput extends AnypointInput {
        *
        * Each array item can be a string which will be compared to user input.
        * If the item is an object is must contain the `value` property which
-       * is used to compare the values. It can also contain `icon` property
-       * which is used to render `<iron-icon>`. It may also contain
-       * `image` property which is used to pass to `<iron-image>` element.
+       * is used to compare the values. It can also contain an `icon` property
+       * which value is an instance of `SVGTemplateResult` from `lit-html`
+       * library.
        *
        * If the suggestion item contains `id` property it's value will be returned
        * as a value of the input. Otherwise `value` is used.
@@ -117,11 +125,7 @@ export class AnypointChipInput extends AnypointInput {
        *  "item 1",
        *  {
        *    "value": "Other item",
-       *    "icon": "add"
-       *  },
-       *  {
-       *    "value": "Image item",
-       *    "image": "path/to/image.png"
+       *    "icon": svg`...`
        *  },
        *  {
        *    "value": "Rendered label",
@@ -132,15 +136,7 @@ export class AnypointChipInput extends AnypointInput {
        *
        * @type {Object<Stirng|Object>}
        */
-      source: { type: Array },
-      /**
-       * A name of the icon to render on the chip when `removable` property
-       * is set.
-       * By default it referes to Polymer's default icons library, to the
-       * `clear` icon. You must include this library into your document.
-       * You can also use whatever other icons library.
-       */
-      chipRemoveIcon: { type: String }
+      source: { type: Array }
     };
   }
   /**
@@ -232,6 +228,29 @@ export class AnypointChipInput extends AnypointInput {
    */
   set onchipschanged(value) {
     this._registerCallback('chips-changed', value);
+  }
+
+  /**
+   * @return {SVGTemplateResult} An icon to render when `removable` is set.
+   * Can be undefined if not previously set.
+   */
+  get chipRemoveIcon() {
+    return this._chipRemoveIcon;
+  }
+  /**
+   * @param {SVGTemplateResult} value An icon to be used to render "remove" icon.
+   * It must be an instance of `SVGTemplateResult` that can be created from `lit-html`
+   * library.
+   *
+   * ```javascript
+   * import { svg } from 'lit-html';
+   * const icon = svg`...`; // content of the icon.
+   * ```
+   */
+  set chipRemoveIcon(value) {
+    const old = this._chipRemoveIcon;
+    this._chipRemoveIcon = value;
+    this.requestUpdate('chipRemoveIcon', old);
   }
 
   constructor() {
@@ -551,19 +570,28 @@ export class AnypointChipInput extends AnypointInput {
     if (!chips || !chips.length) {
       return;
     }
-    const icon = this.chipRemoveIcon || 'clear';
     return chips.map((item, index) => html`
     <anypoint-chip
       .removable="${this._computeChipRemovable(item)}"
       @chip-removed="${this._chipRemovedHandler}"
       tabindex="-1"
-      .removeIcon="${icon}"
+      .removeIcon="${this.chipRemoveIcon}"
       ?compatibility="${this.compatibility}"
       data-index="${index}">
-      ${item.icon ? html `<iron-icon .icon="${item.icon}" slot="icon"></iron-icon>` : ''}
+      ${this._itemIconTemplate(item)}
       ${item.label}
     </anypoint-chip>
     `);
+  }
+
+  _itemIconTemplate(item) {
+    if (!item.icon) {
+      return '';
+    }
+    return html`<span
+      class="icon"
+      slot="icon"
+    >${item.icon}</span>`;
   }
 
   render() {
