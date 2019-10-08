@@ -1,7 +1,7 @@
 {
   "name": "@anypoint-web-components/anypoint-chip-input",
   "description": "A material design input with chips adjusted for Anypoint platform.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "Apache-2.0",
   "main": "anypoint-chip-input.js",
   "keywords": [
