@@ -17,33 +17,6 @@ import '@anypoint-web-components/anypoint-chip/anypoint-chip.js';
 /**
  * `anypoint-chip-input`
  *
- * A material design input with material design chips.
- *
- * It renders chips on the left hand side of the input. It is added as an
- * add-on of the `paper-input` element.
- *
- * It allows to provide list of suggestions that are rendered is user input
- * allows to render suggestions.
- *
- * ## Example
- *
- * ```html
- * <anypoint-chip-input
- *  required
- *  autovalidate
- *  name="fruits"
- *  allowed='["apple","Orange","BANANA"]'
- *  source='["Apple", "Apricot", 'Banana',"Orange"]'
- *  pattern="[a-zA-Z]+"
- *  invalidmessage="This is not a fruit name!">
- *    <label slot="label">List your favourite fruits</label>
- *  </anypoint-chip-input>
- * ```
- *
- * ## Styling
- *
- * Use `anypoint-input` and `anypoint-chip` styles to style the element.
- *
  * @customElement
  * @demo demo/index.html
  * @memberof ApiElements
