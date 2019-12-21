@@ -302,26 +302,6 @@ describe('<anypoint-chip-input>', () => {
       assert.equal(element.value, '');
       assert.equal(element.chipsValue[0], 'c1');
     });
-
-    it('Accepts suggestion and an icon', async () => {
-      element = await suggestionsWithIconsFixture();
-      element.value = 'c';
-      await nextFrame();
-      element.inputElement.dispatchEvent(new CustomEvent('input'))
-      await nextFrame();
-      const node = element.shadowRoot.querySelector('anypoint-autocomplete');
-      node.dispatchEvent(new CustomEvent('selected', {
-        composed: true,
-        detail: {
-          value: {
-            value: 'c1'
-          }
-        }
-      }));
-      await nextFrame();
-      const iconNode = element.shadowRoot.querySelector('anypoint-chip .icon');
-      assert.include(iconNode.innerHTML, 'M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12');
-    });
   });
 
   describe('Value computation', () => {
