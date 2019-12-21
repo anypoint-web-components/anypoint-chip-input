@@ -50,9 +50,9 @@ import '@anypoint-web-components/anypoint-chip/anypoint-chip.js';
  * @extends AnypointInput
  */
 export class AnypointChipInput extends AnypointInput {
-  static get styles() {
+  get styles() {
     return [
-      AnypointInput.styles,
+      super.styles,
       css`:host {
         position: relative;
         width: auto;
@@ -596,6 +596,7 @@ export class AnypointChipInput extends AnypointInput {
 
   render() {
     return html`
+    <style>${this.styles}</style>
     <div class="input-container">
       ${this._prefixTemplate()}
       <div class="input-label">
