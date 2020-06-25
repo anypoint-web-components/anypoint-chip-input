@@ -363,3 +363,16 @@
 
 
 
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/anypoint-web-components/anypoint-chip-input/compare/0.2.1...0.2.2) (2020-06-25)
+
+### Build
+
+* bumping version [9c621da](https://github.com/anypoint-web-components/anypoint-chip-input/commit/9c621dae45a269ddd36c8a8787bfd82c5ad5bc69) by Pawel
+
+
+### Update
+
+* upgrading autocomplete element [a5052d4](https://github.com/anypoint-web-components/anypoint-chip-input/commit/a5052d41b0e0cad08962e07af5fe7451805f01ab) by Pawel
+
+
