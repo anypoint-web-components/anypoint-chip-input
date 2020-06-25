@@ -1,6 +1,6 @@
 [![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-chip-input.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-chip-input)
 
-[![Build Status](https://travis-ci.org/anypoint-web-components/anypoint-chip-input.svg?branch=stage)](https://travis-ci.org/anypoint-web-components/anypoint-chip-input)
+[![Build Status](https://travis-ci.com/anypoint-web-components/anypoint-chip-input.svg)](https://travis-ci.com/anypoint-web-components/anypoint-chip-input)
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/anypoint-web-components/anypoint-chip-input)
 

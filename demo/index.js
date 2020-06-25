@@ -132,14 +132,7 @@ class DemoPage extends ArcDemoPage {
 
   _demoStateHandler(e) {
     const state = e.detail.value;
-    switch (state) {
-      case 0:
-        this.demoCompatibility = false;
-        break;
-      case 1:
-        this.demoCompatibility = true;
-        break;
-    }
+    this.demoCompatibility = state === 1;
   }
 
   _demoTemplate() {
@@ -150,10 +143,10 @@ class DemoPage extends ArcDemoPage {
       demoRemovable,
       demoDisabled,
       demoAllowedOnly,
-      demoSuggestions
+      demoSuggestions,
     } = this;
     const allowed = demoAllowedOnly ? this.allowedChips : undefined;
-    const info = allowed ? 'Only: ' + allowed.join(', ') : undefined;
+    const info = allowed ? `Only: ${allowed.join(', ')}` : undefined;
     const source = demoSuggestions ? this.simpleSuggestions : undefined;
     return html`
       <section class="documentation-section">

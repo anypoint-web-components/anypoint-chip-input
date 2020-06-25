@@ -14,15 +14,20 @@ import { html, css } from 'lit-element';
 import { AnypointInput } from '@anypoint-web-components/anypoint-input/src/AnypointInput.js';
 import '@anypoint-web-components/anypoint-autocomplete/anypoint-autocomplete.js';
 import '@anypoint-web-components/anypoint-chip/anypoint-chip.js';
-/**
- * `anypoint-chip-input`
- *
- * @customElement
- * @demo demo/index.html
- * @memberof ApiElements
- * @extends AnypointInput
- */
+
+/* eslint-disable no-plusplus */
+/* eslint-disable no-continue */
+/* eslint-disable no-param-reassign */
+/* eslint-disable class-methods-use-this */
+
+/** @typedef {import('./AnypointChipInput').ChipSuggestion} ChipSuggestion */
+/** @typedef {import('./AnypointChipInput').ChipItem} ChipItem */
+/** @typedef {import('lit-element').SVGTemplateResult} SVGTemplateResult */
+/** @typedef {import('lit-element').TemplateResult} TemplateResult */
+
+
 export class AnypointChipInput extends AnypointInput {
+  // @ts-ignore
   get styles() {
     return [
       super.styles,
@@ -69,14 +74,14 @@ export class AnypointChipInput extends AnypointInput {
     return {
       /**
        * A list of chip items to render
-       * @type {Array<Object>} Each array item must have `label` property
+       *
+       * Each array item must have `label` property
        * for the chip. It can contain `removable` property it the chip can
        * be removed. It is added by default when chip's source is user input.
        */
       chips: { type: Array },
       /**
        * List of allowed chips labels. Character case does not matter.
-       * @type {Array<String>}
        */
       allowed: { type: Array },
       /**
@@ -106,21 +111,21 @@ export class AnypointChipInput extends AnypointInput {
        *  }
        * ]
        * ```
-       *
-       * @type {Object<Stirng|Object>}
        */
       source: { type: Array }
     };
   }
+
   /**
-   * @return {Array<Object>} previouslt set chips model.
+   * @return {ChipItem[]} previously set chips model.
    */
   get chips() {
     return this._chips;
   }
+
   /**
    * A list of chip items to render
-   * @param {Array<Object>} value Each array item must have `label` property
+   * @param {ChipItem[]} value Each array item must have `label` property
    * for the chip. It can contain `removable` property it the chip can
    * be removed. It is added by default when chip's source is user input.
    */
@@ -180,6 +185,9 @@ export class AnypointChipInput extends AnypointInput {
     }
   }
 
+  /**
+   * @return {string[]}
+   */
   get chipsValue() {
     return (this.chips || []).map((item) => item.id || item.label);
   }
@@ -189,18 +197,28 @@ export class AnypointChipInput extends AnypointInput {
   }
 
   /**
-   * @return {Function} Previously registered handler for `chips-changed` event
+   * @return {EventListener} Previously registered handler for `chips-changed` event
    */
   get onchipschanged() {
     return this['_onchips-changed'];
   }
+
   /**
    * Registers a callback function for `chips-changed` event
-   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * @param {EventListener} value A callback to register. Pass `null` or `undefined`
    * to clear the listener.
    */
   set onchipschanged(value) {
-    this._registerCallback('chips-changed', value);
+    const key = `_onchips-changed`;
+    if (this[key]) {
+      this.removeEventListener('chips-changed', this[key]);
+    }
+    if (typeof value !== 'function') {
+      this[key] = null;
+      return;
+    }
+    this[key] = value;
+    this.addEventListener('chips-changed', value);
   }
 
   /**
@@ -210,6 +228,7 @@ export class AnypointChipInput extends AnypointInput {
   get chipRemoveIcon() {
     return this._chipRemoveIcon;
   }
+
   /**
    * @param {SVGTemplateResult} value An icon to be used to render "remove" icon.
    * It must be an instance of `SVGTemplateResult` that can be created from `lit-html`
@@ -229,6 +248,7 @@ export class AnypointChipInput extends AnypointInput {
   constructor() {
     super();
     this._keydownHandler = this._keydownHandler.bind(this);
+    this.allowed = /** @type string[] */(null);
   }
 
   connectedCallback() {
@@ -245,22 +265,10 @@ export class AnypointChipInput extends AnypointInput {
     this.removeEventListener('keydown', this._keydownHandler);
   }
 
-  _registerCallback(eventType, value) {
-    const key = `_on${eventType}`;
-    if (this[key]) {
-      this.removeEventListener(eventType, this[key]);
-    }
-    if (typeof value !== 'function') {
-      this[key] = null;
-      return;
-    }
-    this[key] = value;
-    this.addEventListener(eventType, value);
-  }
   /**
    * Computes value for paper-chip's `removable` property.
-   * @param {Object} item `chips` list item.
-   * @return {Boolean}
+   * @param {ChipItem} item `chips` list item.
+   * @return {boolean}
    */
   _computeChipRemovable(item) {
     return !!(item && item.removable);
@@ -268,10 +276,10 @@ export class AnypointChipInput extends AnypointInput {
 
   /**
    * Adds a new chip to the list of chips.
-   * @param {String} label Label of the chip
-   * @param {?Boolean} removable True if the chip can be removed.
-   * @param {?String} icon An icon to pass to the chip.
-   * @param {?String} id An ID to be used as a value.
+   * @param {string} label Label of the chip
+   * @param {boolean=} removable True if the chip can be removed.
+   * @param {SVGTemplateResult=} icon An icon to pass to the chip.
+   * @param {string=} id An ID to be used as a value.
    */
   addChip(label, removable, icon, id) {
     const chips = this.chips || [];
@@ -288,20 +296,20 @@ export class AnypointChipInput extends AnypointInput {
       id
     }];
   }
+
   /**
    * Restores chips from passed value.
    * When input's (this element) value change it computes list of chips
-   * @param {Array<Object>} value List of chips definitions
-   * @param {Array<Object>} source List of suggestions
+   * @param {string[]} value List of chips definitions
+   * @param {ChipSuggestion[]} source List of suggestions
    */
-  _computeChipsValues(value, source) {
+  _computeChipsValues(value, source=[]) {
     if (!value || !value.length) {
       if (this.chips) {
         this.chips = [];
       }
       return;
     }
-    source = source || [];
     const newChips = [];
     for (let i = 0, len = value.length; i < len; i++) {
       const _value = value[i];
@@ -311,7 +319,8 @@ export class AnypointChipInput extends AnypointInput {
       const _lowerValue = _value.toLowerCase();
       const _source = this._findSource(source, _lowerValue, _value);
       const chip = {
-        removable: true
+        removable: true,
+        label: '',
       };
       if (_source && typeof _source === 'object') {
         chip.label = _source.value;
@@ -324,18 +333,19 @@ export class AnypointChipInput extends AnypointInput {
     }
     this.chips = newChips;
   }
+
   /**
    * Finsd a suggestion source in the list of suggestions.
    * Primarly it looks for a value (lowercasing it) and then it compares
    * `id` if defined.
-   * @param {Array<Object|String>} source List of suggestions passed to the element
-   * @param {String} value Search value. Should be lowercased before calling this function
-   * @param {?String} id Optional ID to compare.
-   * @return {String|Object|undefined} Suggestion source or undefined if not found.
+   * @param {ChipSuggestion[]} source List of suggestions passed to the element
+   * @param {string} value Search value. Should be lowercased before calling this function
+   * @param {string=} id Optional ID to compare.
+   * @return {ChipSuggestion|undefined} Suggestion source or undefined if not found.
    */
   _findSource(source, value, id) {
     if (!source || !source.length) {
-      return;
+      return undefined;
     }
     for (let i = 0; i < source.length; i++) {
       const item = source[i];
@@ -344,7 +354,7 @@ export class AnypointChipInput extends AnypointInput {
           // Empty string
           continue;
         }
-        const lowerItem = item.toLowerCase();
+        const lowerItem = String(item).toLowerCase();
         if (lowerItem === value || lowerItem === id) {
           return item;
         }
@@ -362,15 +372,17 @@ export class AnypointChipInput extends AnypointInput {
         return item;
       }
     }
+    return undefined;
   }
+
   /**
    * Tests if given value is allowed to enter when `allowed` property is set.
-   * @param {String} value The value to test
-   * @param {?String} id The Suggestion id, if any.
-   * @return {Boolean} True if the value is allowed as a chip label.
+   * @param {string} value The value to test
+   * @param {string=} id The Suggestion id, if any.
+   * @return {boolean} True if the value is allowed as a chip label.
    */
   _isAllowed(value, id) {
-    const allowed = this.allowed;
+    const { allowed } = this;
     if (!allowed || !allowed.length || !value) {
       return true;
     }
@@ -385,13 +397,14 @@ export class AnypointChipInput extends AnypointInput {
     }
     return false;
   }
+
   /**
    * Removes a chip on a specific index.
    *
-   * @param {Number} index Index of the chip in the `chips` array
+   * @param {number} index Index of the chip in the `chips` array
    */
   _removeChip(index) {
-    const chips = this.chips;
+    const {chips} = this;
     if (!chips || !chips.length) {
       return;
     }
@@ -401,6 +414,7 @@ export class AnypointChipInput extends AnypointInput {
       this.validate();
     }
   }
+
   /**
    * Validates the input element and sets an error style if needed.
    *
@@ -412,10 +426,10 @@ export class AnypointChipInput extends AnypointInput {
     }
     const hasChips = this.chips && this.chips.length;
     if (this.required && !hasChips) {
-      this._inputElement.invalid = true;
+      this.invalid = true;
       return false;
     }
-    return this._inputElement.validate();
+    return this.validate();
   }
 
   /**
@@ -423,13 +437,17 @@ export class AnypointChipInput extends AnypointInput {
    * @param {CustomEvent} e
    */
   _chipRemovedHandler(e) {
+    // @ts-ignore
     const index = Number(e.target.dataset.index);
-    if (index !== index) {
+    if (Number.isNaN(index)) {
       return;
     }
     this._removeChip(index);
   }
 
+  /**
+   * @param {KeyboardEvent} e
+   */
   _keydownHandler(e) {
     if (e.key === 'Enter') {
       this._enterDown(e);
@@ -438,21 +456,27 @@ export class AnypointChipInput extends AnypointInput {
     }
   }
 
+  /**
+   * @param {KeyboardEvent} e
+   */
   _enterDown(e) {
     e.preventDefault();
     e.stopPropagation();
     if (!this.validate()) {
       return;
     }
-    const value = this.value;
+    const {value} = this;
     if (!value) {
       return;
     }
     this._processAddInput(value);
   }
 
+  /**
+   * @param {KeyboardEvent} e
+   */
   _backspaceDown(e) {
-    const chips = this.chips;
+    const {chips} = this;
     if (this.value || !chips || !chips.length) {
       return;
     }
@@ -476,7 +500,7 @@ export class AnypointChipInput extends AnypointInput {
   }
 
   _selectedHandler(e) {
-    let value = e.detail.value;
+    let {value} = e.detail;
     if (!value) {
       return;
     }
@@ -506,6 +530,7 @@ export class AnypointChipInput extends AnypointInput {
       this._tryBlurHandler();
     }
   }
+
   /**
    * When autocomplete is enabled, the user type in a value and as a result the
    * autocomplete closes itself for a lack of syggestion the input looses focus
@@ -514,7 +539,7 @@ export class AnypointChipInput extends AnypointInput {
    */
   _tryBlurHandler() {
     setTimeout(() => {
-      const value = this.value;
+      const {value} = this;
       if (!this.focused && value) {
         this._processAddInput(value);
       }
@@ -541,7 +566,7 @@ export class AnypointChipInput extends AnypointInput {
   _renderChipsTemplate() {
     const { chips } = this;
     if (!chips || !chips.length) {
-      return;
+      return '';
     }
     return chips.map((item, index) => html`
     <anypoint-chip
