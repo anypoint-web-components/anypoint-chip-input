@@ -376,3 +376,18 @@
 * upgrading autocomplete element [a5052d4](https://github.com/anypoint-web-components/anypoint-chip-input/commit/a5052d41b0e0cad08962e07af5fe7451805f01ab) by Pawel
 
 
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/anypoint-web-components/anypoint-chip-input/compare/0.2.1...0.2.2) (2020-09-24)
+
+### Build
+
+* bumping version [9c621da](https://github.com/anypoint-web-components/anypoint-chip-input/commit/9c621dae45a269ddd36c8a8787bfd82c5ad5bc69) by Pawel
+
+
+### Update
+
+* updating TS support [825bd72](https://github.com/anypoint-web-components/anypoint-chip-input/commit/825bd722a04a377670aeae53eca48e7e14eb8b8c) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [b7f2866](https://github.com/anypoint-web-components/anypoint-chip-input/commit/b7f28664785a5868c08610910bdc1a224fbf36f6) by Ci agent
+* upgrading autocomplete element [a5052d4](https://github.com/anypoint-web-components/anypoint-chip-input/commit/a5052d41b0e0cad08962e07af5fe7451805f01ab) by Pawel
+
+
