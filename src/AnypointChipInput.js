@@ -10,10 +10,11 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 */
-import { html, css } from 'lit-element';
+import { html } from 'lit-element';
 import { AnypointInput } from '@anypoint-web-components/anypoint-input/src/AnypointInput.js';
 import '@anypoint-web-components/anypoint-autocomplete/anypoint-autocomplete.js';
 import '@anypoint-web-components/anypoint-chip/anypoint-chip.js';
+import elementStyles from './Styles.js';
 
 /* eslint-disable no-plusplus */
 /* eslint-disable no-continue */
@@ -31,42 +32,7 @@ export class AnypointChipInput extends AnypointInput {
   get styles() {
     return [
       super.styles,
-      css`:host {
-        position: relative;
-        width: auto;
-        min-width: 170px;
-        min-height: 56px;
-        height: auto;
-      }
-
-      .chips {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      .prefixes {
-        max-width: 60%;
-      }
-
-      .input-container {
-        min-height: inherit;
-      }
-
-      :host([compatibility]) {
-        min-height: 40px;
-        height: 40px;
-      }
-
-      .icon {
-        fill: currentColor;
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin: 0 0 0 8px;
-        vertical-align: middle;
-      }`
+      elementStyles,
     ];
   }
 
@@ -128,6 +94,7 @@ export class AnypointChipInput extends AnypointInput {
    * @param {ChipItem[]} value Each array item must have `label` property
    * for the chip. It can contain `removable` property it the chip can
    * be removed. It is added by default when chip's source is user input.
+   * @fires chips-changed
    */
   set chips(value) {
     const oldValue = this._chips;
@@ -335,11 +302,12 @@ export class AnypointChipInput extends AnypointInput {
   }
 
   /**
-   * Finsd a suggestion source in the list of suggestions.
-   * Primarly it looks for a value (lowercasing it) and then it compares
+   * Finds a suggestion source in the list of suggestions.
+   * Primarily it looks for a value (and lowercase it) and then it compares
    * `id` if defined.
+   * 
    * @param {ChipSuggestion[]} source List of suggestions passed to the element
-   * @param {string} value Search value. Should be lowercased before calling this function
+   * @param {string} value Search value. Should be lower case before calling this function
    * @param {string=} id Optional ID to compare.
    * @return {ChipSuggestion|undefined} Suggestion source or undefined if not found.
    */
@@ -533,7 +501,7 @@ export class AnypointChipInput extends AnypointInput {
 
   /**
    * When autocomplete is enabled, the user type in a value and as a result the
-   * autocomplete closes itself for a lack of syggestion the input looses focus
+   * autocomplete closes itself for a lack of suggestion the input looses focus
    * for a tick. This checks in a debouncer whether the input still has focus and
    * if not it commits the value to the chip model.
    */

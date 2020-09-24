@@ -21,41 +21,17 @@ export declare interface ChipItem {
 }
 
 /**
- * `anypoint-chip-input`
- *
- * A material design input with material design chips.
- *
- * It renders chips on the left hand side of the input. It is added as an
- * add-on of the `paper-input` element.
- *
- * It allows to provide list of suggestions that are rendered is user input
- * allows to render suggestions.
- *
- * ## Example
- *
- * ```html
- * <anypoint-chip-input
- *  required
- *  autovalidate
- *  name="fruits"
- *  allowed='["apple","Orange","BANANA"]'
- *  source='["Apple", "Apricot", 'Banana',"Orange"]'
- *  pattern="[a-zA-Z]+"
- *  invalidmessage="This is not a fruit name!">
- *    <label slot="label">List your favourite fruits</label>
- *  </anypoint-chip-input>
- * ```
- *
- * ## Styling
- *
- * Use `anypoint-input` and `anypoint-chip` styles to style the element.
+ * @fires chips-changed Dispatched when a list of chips change
+ * @fires value-changed Dispatched when the current value change
  */
 export declare class AnypointChipInput extends AnypointInput {
-
   /**
    * A list of chip items to render
    */
   chips: ChipItem[];
+  /**
+   * @attribute
+   */
   value: any;
 
   /**
@@ -127,12 +103,12 @@ export declare class AnypointChipInput extends AnypointInput {
   _computeChipsValues(value: string[], source: ChipSuggestion[]): void;
 
   /**
-   * Finsd a suggestion source in the list of suggestions.
-   * Primarly it looks for a value (lowercasing it) and then it compares
+   * Finds a suggestion source in the list of suggestions.
+   * Primarily it looks for a value (and lowercase it) and then it compares
    * `id` if defined.
    *
    * @param source List of suggestions passed to the element
-   * @param value Search value. Should be lowercased before calling this function
+   * @param value Search value. Should be lower case before calling this function
    * @param id Optional ID to compare.
    * @returns Suggestion source or undefined if not found.
    */
@@ -172,7 +148,7 @@ export declare class AnypointChipInput extends AnypointInput {
 
   /**
    * When autocomplete is enabled, the user type in a value and as a result the
-   * autocomplete closes itself for a lack of syggestion the input looses focus
+   * autocomplete closes itself for a lack of suggestion the input looses focus
    * for a tick. This checks in a debouncer whether the input still has focus and
    * if not it commits the value to the chip model.
    */

@@ -1,0 +1,407 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "anypoint-chip-input",
+      "path": "./anypoint-chip-input.js",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "The value for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<input>`'s `bindValue`\nproperty, or the value property of your input that is `notify:true`."
+        },
+        {
+          "name": "preventInvalidInput",
+          "description": "Set to true to prevent the user from entering invalid input.",
+          "type": "boolean"
+        },
+        {
+          "name": "allowedPattern",
+          "description": "Set this to specify the pattern allowed by `preventInvalidInput`.",
+          "type": "string"
+        },
+        {
+          "name": "type",
+          "description": "The type of the input. The supported types are `text`, `number` and `password`.",
+          "type": "\"number\" | \"hidden\" | \"text\" | \"search\" | \"tel\" | \"url\" | \"email\" | \"password\" | \"datetime\" | \"date\" | \"month\" | \"week\" | \"time\" | \"datetime-local\" | \"range\" | \"color\" | \"checkbox\" | ... 5 more ... | \"button\""
+        },
+        {
+          "name": "list",
+          "description": "The datalist of the input (if any). This should match the id of an existing `<datalist>`.",
+          "type": "string"
+        },
+        {
+          "name": "pattern",
+          "description": "A pattern to validate the `input` with.",
+          "type": "string"
+        },
+        {
+          "name": "required",
+          "description": "Sets the input as required.",
+          "type": "boolean"
+        },
+        {
+          "name": "invalidMessage",
+          "description": "The error message to display when the input is invalid.",
+          "type": "string"
+        },
+        {
+          "name": "infoMessage",
+          "description": "Assistive text value.\nRendered below the input.",
+          "type": "string"
+        },
+        {
+          "name": "autoValidate",
+          "description": "Set to true to auto-validate the input value.",
+          "type": "boolean"
+        },
+        {
+          "name": "autocomplete",
+          "description": "Bind the `<input>`'s `autocomplete` property.",
+          "type": "\"tel\" | \"url\" | \"on\" | \"off\" | \"additional-name\" | \"street-address\" | \"address-level1\" | \"address-level2\" | \"address-level3\" | \"address-level4\" | \"address-line1\" | \"address-line2\" | ... 39 more ... | \"photo\"",
+          "default": "\"off\""
+        },
+        {
+          "name": "autofocus",
+          "description": "Binds this to the `<input>`'s `autofocus` property.",
+          "type": "boolean"
+        },
+        {
+          "name": "inputMode",
+          "description": "Binds this to the `<input>`'s `inputMode` property.",
+          "type": "string"
+        },
+        {
+          "name": "minLength",
+          "description": "The minimum length of the input value.\nBinds this to the `<input>`'s `minLength` property.",
+          "type": "number"
+        },
+        {
+          "name": "maxLength",
+          "description": "The maximum length of the input value.\nBinds this to the `<input>`'s `maxLength` property.",
+          "type": "number"
+        },
+        {
+          "name": "min",
+          "description": "The minimum (numeric or date-time) input value.\nBinds this to the `<input>`'s `min` property.",
+          "type": "string"
+        },
+        {
+          "name": "max",
+          "description": "The maximum (numeric or date-time) input value.\nCan be a String (e.g. `\"2000-01-01\"`) or a Number (e.g. `2`).\nBinds this to the `<input>`'s `max` property.",
+          "type": "string"
+        },
+        {
+          "name": "step",
+          "description": "Limits the numeric or date-time increments.\n\nBinds this to the `<input>`'s `step` property.",
+          "type": "number"
+        },
+        {
+          "name": "name",
+          "description": "Binds this to the `<input>`'s `name` property.",
+          "type": "string"
+        },
+        {
+          "name": "placeholder",
+          "description": "A placeholder string in addition to the label. If this is set, the label will always float.\nPlease, use with careful.",
+          "type": "string"
+        },
+        {
+          "name": "readOnly",
+          "description": "Binds this to the `<input>`'s `readonly` property.",
+          "type": "boolean",
+          "default": "\"false\""
+        },
+        {
+          "name": "size",
+          "description": "Binds this to the `<input>`'s `size` property.",
+          "type": "number"
+        },
+        {
+          "name": "autocorrect",
+          "description": "Binds this to the `<input>`'s `autocorrect` property.",
+          "type": "string",
+          "default": "\"off\""
+        },
+        {
+          "name": "results",
+          "description": "Binds this to the `<input>`'s `results` property,\nused with type=search.\n\nThe maximum number of items that should be displayed in the\ndrop-down list of previous search queries. Safari only.",
+          "type": "number"
+        },
+        {
+          "name": "accept",
+          "description": "Binds this to the `<input>`'s `accept` property,\nused with type=file.",
+          "type": "string"
+        },
+        {
+          "name": "multiple",
+          "description": "Binds this to the`<input>`'s `multiple` property,\nused with type=file.",
+          "type": "boolean"
+        },
+        {
+          "name": "outlined",
+          "description": "Enables outlined theme.",
+          "type": "boolean"
+        },
+        {
+          "name": "compatibility",
+          "description": "Enables compatibility with Anypoint components.",
+          "type": "boolean"
+        },
+        {
+          "name": "noLabelFloat",
+          "description": "When set, it reduces height of the button and hides\nthe label when the value is provided.\n\nUse it carefully as user should be able to recognize the input\nwhen the value is predefined.",
+          "type": "boolean"
+        }
+      ],
+      "properties": [
+        {
+          "name": "chips",
+          "description": "A list of chip items to render",
+          "type": "ChipItem[]"
+        },
+        {
+          "name": "source",
+          "description": "List of suggestions to render when the user type in the input field.\n\nEach array item can be a string which will be compared to user input.\nIf the item is an object is must contain the `value` property which\nis used to compare the values. It can also contain an `icon` property\nwhich value is an instance of `SVGTemplateResult` from `lit-html`\nlibrary.\n\nIf the suggestion item contains `id` property it's value will be returned\nas a value of the input. Otherwise `value` is used.\n\n### Example\n\n```json\n[\n  \"item 1\",\n  {\n    \"value\": \"Other item\",\n    \"icon\": svg`...`\n  },\n  {\n    \"value\": \"Rendered label\",\n    \"id\": \"returned-value\"\n  }\n]\n```",
+          "type": "ChipSuggestion[]"
+        },
+        {
+          "name": "chipsValue",
+          "type": "string[]"
+        },
+        {
+          "name": "onchipschanged",
+          "type": "EventListener | null"
+        },
+        {
+          "name": "chipRemoveIcon",
+          "type": "SVGTemplateResult | null"
+        },
+        {
+          "name": "allowed",
+          "description": "List of allowed chips labels. Character case does not matter.",
+          "type": "string[]"
+        },
+        {
+          "name": "styles",
+          "type": "CSSResult | CSSResult[]"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "description": "The value for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<input>`'s `bindValue`\nproperty, or the value property of your input that is `notify:true`."
+        },
+        {
+          "name": "preventInvalidInput",
+          "attribute": "preventInvalidInput",
+          "description": "Set to true to prevent the user from entering invalid input.",
+          "type": "boolean"
+        },
+        {
+          "name": "allowedPattern",
+          "attribute": "allowedPattern",
+          "description": "Set this to specify the pattern allowed by `preventInvalidInput`.",
+          "type": "string"
+        },
+        {
+          "name": "type",
+          "attribute": "type",
+          "description": "The type of the input. The supported types are `text`, `number` and `password`.",
+          "type": "\"number\" | \"hidden\" | \"text\" | \"search\" | \"tel\" | \"url\" | \"email\" | \"password\" | \"datetime\" | \"date\" | \"month\" | \"week\" | \"time\" | \"datetime-local\" | \"range\" | \"color\" | \"checkbox\" | ... 5 more ... | \"button\""
+        },
+        {
+          "name": "list",
+          "attribute": "list",
+          "description": "The datalist of the input (if any). This should match the id of an existing `<datalist>`.",
+          "type": "string"
+        },
+        {
+          "name": "pattern",
+          "attribute": "pattern",
+          "description": "A pattern to validate the `input` with.",
+          "type": "string"
+        },
+        {
+          "name": "required",
+          "attribute": "required",
+          "description": "Sets the input as required.",
+          "type": "boolean"
+        },
+        {
+          "name": "invalidMessage",
+          "attribute": "invalidMessage",
+          "description": "The error message to display when the input is invalid.",
+          "type": "string"
+        },
+        {
+          "name": "infoMessage",
+          "attribute": "infoMessage",
+          "description": "Assistive text value.\nRendered below the input.",
+          "type": "string"
+        },
+        {
+          "name": "autoValidate",
+          "attribute": "autoValidate",
+          "description": "Set to true to auto-validate the input value.",
+          "type": "boolean"
+        },
+        {
+          "name": "autocomplete",
+          "attribute": "autocomplete",
+          "description": "Bind the `<input>`'s `autocomplete` property.",
+          "type": "\"tel\" | \"url\" | \"on\" | \"off\" | \"additional-name\" | \"street-address\" | \"address-level1\" | \"address-level2\" | \"address-level3\" | \"address-level4\" | \"address-line1\" | \"address-line2\" | ... 39 more ... | \"photo\"",
+          "default": "\"off\""
+        },
+        {
+          "name": "autofocus",
+          "attribute": "autofocus",
+          "description": "Binds this to the `<input>`'s `autofocus` property.",
+          "type": "boolean"
+        },
+        {
+          "name": "inputMode",
+          "attribute": "inputMode",
+          "description": "Binds this to the `<input>`'s `inputMode` property.",
+          "type": "string"
+        },
+        {
+          "name": "minLength",
+          "attribute": "minLength",
+          "description": "The minimum length of the input value.\nBinds this to the `<input>`'s `minLength` property.",
+          "type": "number"
+        },
+        {
+          "name": "maxLength",
+          "attribute": "maxLength",
+          "description": "The maximum length of the input value.\nBinds this to the `<input>`'s `maxLength` property.",
+          "type": "number"
+        },
+        {
+          "name": "min",
+          "attribute": "min",
+          "description": "The minimum (numeric or date-time) input value.\nBinds this to the `<input>`'s `min` property.",
+          "type": "string"
+        },
+        {
+          "name": "max",
+          "attribute": "max",
+          "description": "The maximum (numeric or date-time) input value.\nCan be a String (e.g. `\"2000-01-01\"`) or a Number (e.g. `2`).\nBinds this to the `<input>`'s `max` property.",
+          "type": "string"
+        },
+        {
+          "name": "step",
+          "attribute": "step",
+          "description": "Limits the numeric or date-time increments.\n\nBinds this to the `<input>`'s `step` property.",
+          "type": "number"
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "description": "Binds this to the `<input>`'s `name` property.",
+          "type": "string"
+        },
+        {
+          "name": "placeholder",
+          "attribute": "placeholder",
+          "description": "A placeholder string in addition to the label. If this is set, the label will always float.\nPlease, use with careful.",
+          "type": "string"
+        },
+        {
+          "name": "readOnly",
+          "attribute": "readOnly",
+          "description": "Binds this to the `<input>`'s `readonly` property.",
+          "type": "boolean",
+          "default": "\"false\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "description": "Binds this to the `<input>`'s `size` property.",
+          "type": "number"
+        },
+        {
+          "name": "autocorrect",
+          "attribute": "autocorrect",
+          "description": "Binds this to the `<input>`'s `autocorrect` property.",
+          "type": "string",
+          "default": "\"off\""
+        },
+        {
+          "name": "results",
+          "attribute": "results",
+          "description": "Binds this to the `<input>`'s `results` property,\nused with type=search.\n\nThe maximum number of items that should be displayed in the\ndrop-down list of previous search queries. Safari only.",
+          "type": "number"
+        },
+        {
+          "name": "accept",
+          "attribute": "accept",
+          "description": "Binds this to the `<input>`'s `accept` property,\nused with type=file.",
+          "type": "string"
+        },
+        {
+          "name": "multiple",
+          "attribute": "multiple",
+          "description": "Binds this to the`<input>`'s `multiple` property,\nused with type=file.",
+          "type": "boolean"
+        },
+        {
+          "name": "outlined",
+          "attribute": "outlined",
+          "description": "Enables outlined theme.",
+          "type": "boolean"
+        },
+        {
+          "name": "compatibility",
+          "attribute": "compatibility",
+          "description": "Enables compatibility with Anypoint components.",
+          "type": "boolean"
+        },
+        {
+          "name": "noLabelFloat",
+          "attribute": "noLabelFloat",
+          "description": "When set, it reduces height of the button and hides\nthe label when the value is provided.\n\nUse it carefully as user should be able to recognize the input\nwhen the value is predefined.",
+          "type": "boolean"
+        },
+        {
+          "name": "inputElement",
+          "description": "A reference to the input element.",
+          "type": "HTMLInputElement | HTMLTextAreaElement"
+        },
+        {
+          "name": "disabled",
+          "description": "If true the button is a toggle and is currently in the active state.",
+          "type": "boolean"
+        },
+        {
+          "name": "focused",
+          "description": "If true the element currently has focus.",
+          "type": "boolean"
+        },
+        {
+          "name": "validator",
+          "description": "ame of the validator or validators to use.\nIf the element should be validated by more than one validator then separate names with\nspace. See docs for `ValidatorMixin` for description of how to define a\nvalidator.",
+          "type": "boolean"
+        },
+        {
+          "name": "validationStates",
+          "description": "After calling `validate()` this is be populated by latest result of the\ntest for each validator. Result item contains following properties:\n\n- validator `string` Name of the validator\n- valid `boolean` Result of the test\n- message `string` Error message\n\nThis property is `undefined` if `validator` is not set.",
+          "type": "ValidationResult[]"
+        },
+        {
+          "name": "invalid",
+          "description": "True if the last call to `validate` is invalid.",
+          "type": "boolean"
+        }
+      ],
+      "events": [
+        {
+          "name": "chips-changed",
+          "description": "Dispatched when a list of chips change"
+        },
+        {
+          "name": "value-changed",
+          "description": "Dispatched when the current value change"
+        }
+      ]
+    }
+  ]
+}
