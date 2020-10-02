@@ -6,11 +6,11 @@ export declare interface ChipSuggestion extends Suggestion {
   /**
    * An instance of `SVGTemplateResult` from `lit-html` library.
    */
-  icon: SVGTemplateResult;
+  icon?: SVGTemplateResult;
   /**
    * This value will be returned as the value of the input
    */
-  id: string;
+  id?: string;
 }
 
 export declare interface ChipItem {
