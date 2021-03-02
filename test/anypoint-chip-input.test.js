@@ -5,19 +5,33 @@ import { clearAll, clear } from '@advanced-rest-client/arc-icons/ArcIcons.js';
 import { directionsBike, directionsBoat, directionsBus } from '../demo/maps-icons.js';
 import '../anypoint-chip-input.js';
 
+/** @typedef {import('../index').AnypointChipInput} AnypointChipInput */
+
 describe('<anypoint-chip-input>', () => {
+  /**
+   * @returns {Promise<AnypointChipInput>}
+   */
   async function basicFixture() {
-    return (await fixture(`<anypoint-chip-input></anypoint-chip-input>`));
+    return (fixture(`<anypoint-chip-input></anypoint-chip-input>`));
   }
 
+  /**
+   * @returns {Promise<AnypointChipInput>}
+   */
   async function basicRequiredFixture() {
-    return (await fixture(`<anypoint-chip-input required></anypoint-chip-input>`));
+    return (fixture(`<anypoint-chip-input required></anypoint-chip-input>`));
   }
 
+  /**
+   * @returns {Promise<AnypointChipInput>}
+   */
   async function patternFixture() {
-    return (await fixture(`<anypoint-chip-input pattern="[a-zA-Z]+"></anypoint-chip-input>`));
+    return fixture(`<anypoint-chip-input pattern="[a-zA-Z]+"></anypoint-chip-input>`);
   }
 
+  /**
+   * @returns {Promise<AnypointChipInput>}
+   */
   async function chipsFixture() {
     const chips = [{
       label: 'c-1'
@@ -27,11 +41,14 @@ describe('<anypoint-chip-input>', () => {
     }, {
       label: 'c-3'
     }];
-    return (await fixture(html`
+    return fixture(html`
       <anypoint-chip-input
-        .chips="${chips}"></anypoint-chip-input>`));
+        .chips="${chips}"></anypoint-chip-input>`);
   }
 
+  /**
+   * @returns {Promise<AnypointChipInput>}
+   */
   async function chipsWithIconFixture() {
     const chips = [{
       label: 'c-1'
@@ -41,55 +58,67 @@ describe('<anypoint-chip-input>', () => {
     }, {
       label: 'c-3'
     }];
-    return (await fixture(html`
+    return fixture(html`
       <anypoint-chip-input
         .chipRemoveIcon="${clearAll}"
-        .chips="${chips}"></anypoint-chip-input>`));
+        .chips="${chips}"></anypoint-chip-input>`);
   }
 
+  /**
+   * @returns {Promise<AnypointChipInput>}
+   */
   async function allRemoveFixture() {
     const chips = [
       { label: 'c-1', removable: true },
       { label: 'c-2', removable: true },
       { label: 'c-3', removable: true }
     ];
-    return (await fixture(html`
+    return fixture(html`
       <anypoint-chip-input
         .chips='${chips}'></anypoint-chip-input>
-    `));
+    `);
   }
 
+  /**
+   * @returns {Promise<AnypointChipInput>}
+   */
   async function allowedFixture() {
     const allowed = ['c1', 'c2', 'c-3'];
-    return (await fixture(html`
+    return fixture(html`
       <anypoint-chip-input
         .allowed="${allowed}"></anypoint-chip-input>
-    `));
+    `);
   }
 
+  /**
+   * @returns {Promise<AnypointChipInput>}
+   */
   async function suggestionsFixture() {
-    return (await fixture(`
+    return fixture(`
       <anypoint-chip-input source='["c1", "c2", "c-3"]'></anypoint-chip-input>
-    `));
+    `);
   }
 
+  /**
+   * @returns {Promise<AnypointChipInput>}
+   */
   async function suggestionsWithIconsFixture() {
     const source = [
       { value: 'c1', icon: directionsBike },
       { value: 'c2', icon: directionsBoat },
       { value: 'c3', icon: directionsBus },
     ];
-    return (await fixture(html`
+    return fixture(html`
       <anypoint-chip-input
         name="test"
         .source="${source}">
         <label slot="label">x</label>
       </anypoint-chip-input>
-    `));
+    `);
   }
 
   describe('Adding a chip', () => {
-    let element;
+    let element = /** @type AnypointChipInput */ (null);
 
     it('chipsValue is initially undefined', async () => {
       element = await basicFixture();
@@ -186,7 +215,7 @@ describe('<anypoint-chip-input>', () => {
   });
 
   describe('Removing a chip', () => {
-    let element;
+    let element = /** @type AnypointChipInput */ (null);
     it('does nothing when no input and no chips', async () => {
       element = await basicFixture();
     });
@@ -222,7 +251,7 @@ describe('<anypoint-chip-input>', () => {
     it('Enters chip label into the input field', async () => {
       element = await allRemoveFixture();
       MockInteractions.keyDownOn(element.inputElement, 8, [], 'Backspace');
-      await aTimeout();
+      await aTimeout(0);
       assert.equal(element.value, 'c-3');
     });
 
@@ -239,7 +268,7 @@ describe('<anypoint-chip-input>', () => {
   });
 
   describe('Allowed chips', () => {
-    let element;
+    let element = /** @type AnypointChipInput */ (null);
     beforeEach(async () => {
       element = await allowedFixture();
     });
@@ -262,7 +291,7 @@ describe('<anypoint-chip-input>', () => {
   });
 
   describe('Auto suggestions', () => {
-    let element;
+    let element = /** @type AnypointChipInput */ (null);
     beforeEach(async () => {
       element = await suggestionsFixture();
     });
@@ -305,7 +334,7 @@ describe('<anypoint-chip-input>', () => {
   });
 
   describe('Value computation', () => {
-    let element;
+    let element = /** @type AnypointChipInput */ (null);
 
     it('creates chips from chipsValue', async () => {
       element = await basicFixture();
@@ -358,7 +387,7 @@ describe('<anypoint-chip-input>', () => {
   });
 
   describe('Input blur', () => {
-    let element;
+    let element = /** @type AnypointChipInput */ (null);
     beforeEach(async () => {
       element = await basicFixture();
       await nextFrame();
@@ -370,7 +399,7 @@ describe('<anypoint-chip-input>', () => {
       MockInteractions.focus(element);
       await nextFrame();
       MockInteractions.blur(element);
-      await aTimeout();
+      await aTimeout(0);
       assert.equal(element.value, '', 'input value is cleared');
       assert.deepEqual(element.chipsValue, ['test'], 'chipsValue has the value');
     });
@@ -381,7 +410,7 @@ describe('<anypoint-chip-input>', () => {
       MockInteractions.focus(element);
       await nextFrame();
       MockInteractions.blur(element);
-      await aTimeout();
+      await aTimeout(0);
       assert.deepEqual(element.chipsValue, [], 'chipsValue has no value');
     });
 
@@ -392,7 +421,7 @@ describe('<anypoint-chip-input>', () => {
       await nextFrame();
       MockInteractions.blur(element);
       MockInteractions.focus(element);
-      await aTimeout();
+      await aTimeout(0);
       assert.deepEqual(element.chipsValue, [], 'chipsValue has no value');
     });
   });
@@ -425,33 +454,36 @@ describe('<anypoint-chip-input>', () => {
   });
 
   describe('_findSource()', () => {
-    let element;
+    let element = /** @type AnypointChipInput */ (null);
     beforeEach(async () => {
       element = await basicFixture();
     });
 
     it('Returns undefine when no source', () => {
-      const result = element._findSource();
+      const result = element._findSource(undefined, undefined);
       assert.isUndefined(result);
     });
 
     it('Returns undefine when source empty', () => {
-      const result = element._findSource([]);
+      const result = element._findSource([], undefined);
       assert.isUndefined(result);
     });
 
     it('Finds string item by value', () => {
       const result = element._findSource(['test'], 'test');
+      // @ts-ignore
       assert.equal(result, 'test');
     });
 
     it('Ignores empty values', () => {
       const result = element._findSource(['', 'test'], 'test');
+      // @ts-ignore
       assert.equal(result, 'test');
     });
 
     it('Ignores case of source', () => {
       const result = element._findSource(['', 'Test'], 'test');
+      // @ts-ignore
       assert.equal(result, 'Test');
     });
 
@@ -462,6 +494,7 @@ describe('<anypoint-chip-input>', () => {
 
     it('Finds string item by id', () => {
       const result = element._findSource(['test'], '', 'test');
+      // @ts-ignore
       assert.equal(result, 'test');
     });
 
@@ -487,7 +520,7 @@ describe('<anypoint-chip-input>', () => {
   });
 
   describe('Chip icon', () => {
-    let element;
+    let element = /** @type AnypointChipInput */ (null);
     it('has default icon on the chip', async () => {
       element = await chipsFixture();
       await nextFrame();
@@ -504,7 +537,7 @@ describe('<anypoint-chip-input>', () => {
   });
 
   describe('onchipschanged', () => {
-    let element;
+    let element = /** @type AnypointChipInput */ (null);
     beforeEach(async () => {
       element = await basicFixture();
     });
@@ -551,7 +584,9 @@ describe('<anypoint-chip-input>', () => {
         name="i1">
         <label slot="label">x</label>
       </anypoint-chip-input>`);
-      await assert.isAccessible(element);
+      await assert.isAccessible(element, {
+        ignoredRules: ['aria-hidden-focus'],
+      });
     });
 
     it('passes tests when required', async () => {
@@ -560,7 +595,9 @@ describe('<anypoint-chip-input>', () => {
         required>
         <label slot="label">x</label>
       </anypoint-chip-input>`);
-      await assert.isAccessible(element);
+      await assert.isAccessible(element, {
+        ignoredRules: ['aria-hidden-focus'],
+      });
     });
 
     it('passes tests when disabled', async () => {
@@ -569,7 +606,9 @@ describe('<anypoint-chip-input>', () => {
         disabled>
         <label slot="label">x</label>
       </anypoint-chip-input>`);
-      await assert.isAccessible(element);
+      await assert.isAccessible(element, {
+        ignoredRules: ['aria-hidden-focus'],
+      });
     });
 
     it('passes tests when readOnly', async () => {
@@ -578,12 +617,16 @@ describe('<anypoint-chip-input>', () => {
         readOnly>
         <label slot="label">x</label>
       </anypoint-chip-input>`);
-      await assert.isAccessible(element);
+      await assert.isAccessible(element, {
+        ignoredRules: ['aria-hidden-focus'],
+      });
     });
 
     it('passes tests when suggestions', async () => {
       const element = await suggestionsWithIconsFixture();
-      await assert.isAccessible(element);
+      await assert.isAccessible(element, {
+        ignoredRules: ['aria-hidden-focus'],
+      });
     });
   });
 });

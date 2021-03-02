@@ -1,9 +1,3 @@
-[![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-chip-input.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-chip-input)
-
-[![Build Status](https://travis-ci.com/anypoint-web-components/anypoint-chip-input.svg)](https://travis-ci.com/anypoint-web-components/anypoint-chip-input)
-
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/anypoint-web-components/anypoint-chip-input)
-
 # anypoint-chip-input
 
 A material design input with chips styled for Anypoint platform.
@@ -12,11 +6,15 @@ This element extends AnypointInput class.
 
 Chips are compact elements that represent an input, attribute, or action.
 
+[![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-chip-input.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-chip-input)
+
+[![tests](https://github.com/anypoint-web-components/anypoint-chip-input/actions/workflows/tests.yml/badge.svg)](https://github.com/anypoint-web-components/anypoint-chip-input/actions/workflows/tests.yml)
 
 ## Usage
 
 ### Installation
-```
+
+```sh
 npm install --save @anypoint-web-components/anypoint-chip-input
 ```
 
@@ -85,7 +83,6 @@ Chips are required to have a `label` property that is used to render the value.
 A chip can have a `removable` property that allows the user to remove the chip from the input.
 
 An `icon` property allows to render a chip with an icon.
-
 
 ### Chip suggestions
 
@@ -250,6 +247,7 @@ npm start
 ```
 
 ### Running the tests
+
 ```sh
 npm test
 ```

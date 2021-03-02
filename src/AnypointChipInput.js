@@ -11,7 +11,7 @@ License for the specific language governing permissions and limitations under
 the License.
 */
 import { html } from 'lit-element';
-import { AnypointInput } from '@anypoint-web-components/anypoint-input/src/AnypointInput.js';
+import { AnypointInput } from '@anypoint-web-components/anypoint-input';
 import '@anypoint-web-components/anypoint-autocomplete/anypoint-autocomplete.js';
 import '@anypoint-web-components/anypoint-chip/anypoint-chip.js';
 import elementStyles from './Styles.js';

@@ -69,6 +69,7 @@ export declare class AnypointChipInput extends AnypointInput {
 
   /**
    * List of allowed chips labels. Character case does not matter.
+   * @attribute
    */
   allowed: string[];
   render(): TemplateResult;
@@ -112,7 +113,7 @@ export declare class AnypointChipInput extends AnypointInput {
    * @param id Optional ID to compare.
    * @returns Suggestion source or undefined if not found.
    */
-  _findSource(source: ChipSuggestion[], value: string, id?: string): ChipSuggestion|undefined;
+  _findSource(source: ChipSuggestion[]|string[], value: string, id?: string): ChipSuggestion|undefined;
 
   /**
    * Tests if given value is allowed to enter when `allowed` property is set.
