@@ -23,6 +23,7 @@ export declare interface ChipItem {
 /**
  * @fires chips-changed Dispatched when a list of chips change
  * @fires value-changed Dispatched when the current value change
+ * @deprecated Migrate to @anypoint-web-components/awc
  */
 export declare class AnypointChipInput extends AnypointInput {
   /**

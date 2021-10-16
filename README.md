@@ -1,4 +1,8 @@
-# anypoint-chip-input
+# Deprecated
+
+This component has been moved to `anypoint-web-components/awc`.
+
+-----
 
 A material design input with chips styled for Anypoint platform.
 
